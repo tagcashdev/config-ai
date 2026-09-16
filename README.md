@@ -4,32 +4,31 @@ Un ensemble de compétences modulaires (**Skills**) et de standards d'ingénieri
 
 ---
 
-## ⚡ Installation Automatique en 1 Prompt (Recommandé)
+## ⚡ Installation Automatique en 1 Prompt (Autonome & Idempotent)
 
 Ouvrez **Claude Code** (Desktop ou Terminal) ou **Google Antigravity** dans le dossier de **votre propre projet**, puis collez simplement ce prompt :
 
 ```text
-Tu es mon assistant d'ingénierie logicielle. Je souhaite configurer mon environnement de travail avec les standards d'ingénierie de notre équipe.
+Tu es mon assistant d'ingénierie logicielle. Configure mon environnement de travail de manière 100% autonome et strictement idempotente (l'exécution répétée ne doit rien casser ni rien écraser d'existant).
 
-Voici le dépôt de configuration : https://github.com/tagcashdev/config-ai.git
+Voici le dépôt source de configuration : https://github.com/tagcashdev/config-ai.git
 
-Exécute les actions suivantes pas à pas :
-1. Filet de sécurité Git (Prérequis Zéro) :
-   - Vérifie que Git est installé sur la machine.
-   - Vérifie si le répertoire actuel est un dépôt Git initialisé. Si non, exécute immédiatement "git init" pour sécuriser le suivi de version avant toute autre action.
-2. Détection de l'environnement : Détermine si tu es sous Claude Code ou sous Google Antigravity.
+Exécute les actions suivantes pas à pas et de façon autonome :
+1. Filet de sécurité Git (Prérequis Zéro & Autonome) :
+   - Vérifie si Git est installé.
+   - Si Git est absent : installe-le silencieusement et de manière autonome (ex: winget install --id Git.Git -e --source winget --silent sous Windows, ou sudo apt-get install -y git sous Linux), puis rafraîchis ton PATH.
+   - Vérifie si le projet courant est un dépôt Git ("git rev-parse --is-inside-work-tree"). Si non, initialise-le immédiatement avec "git init". Si oui, n'y touche pas (idempotence).
+2. Détection de l'environnement : Détermine si tu opères sous Claude Code ou sous Google Antigravity.
 3. Récupération des ressources : Récupère les fichiers du dépôt ci-dessus.
-4. Déploiement :
-   - Si Claude Code : Copie templates/CLAUDE.md à la racine de mon projet et installe le contenu de skills/ dans .claude/skills/.
-   - Si Google Antigravity : Copie templates/GEMINI.md à la racine de mon projet et installe le contenu de skills/ dans .gemini/config/skills/.
-5. Initialisation : Si aucun fichier PROJECT_CONTEXT.md n'existe à la racine, copie templates/PROJECT_CONTEXT.md.
-6. Remplissage guidé du PROJECT_CONTEXT.md :
-   - Pose-moi les questions du template une par une (nom du projet, problème résolu, utilisateurs cibles, stack technique, services tiers, etc.).
-   - Remplis le fichier avec mes réponses et montre-moi le résultat final pour validation avant de continuer.
+4. Déploiement Idempotent :
+   - Si Claude Code : Installe templates/CLAUDE.md à la racine (uniquement s'il n'existe pas déjà) et déploie/mets à jour les dossiers de skills/ dans .claude/skills/.
+   - Si Google Antigravity : Installe templates/GEMINI.md à la racine (uniquement s'il n'existe pas déjà) et déploie/mets à jour les dossiers de skills/ dans .gemini/config/skills/.
+5. Fiche Contexte : Si aucun fichier PROJECT_CONTEXT.md n'existe à la racine, copie templates/PROJECT_CONTEXT.md. S'il existe déjà, conserve-le intact.
+6. Remplissage guidé :
+   - Uniquement si PROJECT_CONTEXT.md vient d'être créé ou est encore vide, pose-moi les questions du template une par une pour le compléter, puis valide avec moi.
 7. Nettoyage : Supprime les éventuels fichiers temporaires de clone.
-8. Mini-diagnostic de démarrage :
-   - Demande-moi en 2 questions simples si mon projet comporte une interface mobile/web (pour activer ui-ux-pro-max) ou des besoins spécifiques tiers (pour utiliser skill-finder).
-   - Propose-moi ensuite de lancer l'interrogatoire d'architecture avec la compétence architecture-challenge !
+8. Diagnostic de démarrage :
+   - Vérifie si le projet comporte une interface (UI/UX) ou des besoins spécifiques tiers, puis propose de lancer l'interrogatoire d'architecture avec la compétence architecture-challenge !
 ```
 
 ---
@@ -37,14 +36,16 @@ Exécute les actions suivantes pas à pas :
 ## 🤖 Instructions pour l'IA (Agent Setup Contract)
 
 Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scrupuleusement le protocole suivant :
-1. **Sécurité Git préalable :** Contrôle impérativement la présence de Git et initialise le dépôt (`git init`) s'il ne l'est pas déjà. Aucune édition de fichier ne doit être effectuée hors contrôle de version.
-2. **Détection de l'environnement :** Détecte si le projet tourne sous Claude Code (`CLAUDE.md` / `.claude/`) ou Google Antigravity (`GEMINI.md` / `.gemini/`).
-3. **Installation des Directives & Compétences :**
+1. **Autonomie & Sécurité Git préalable :** Vérifie la présence de Git. Installe-le de manière autonome via le gestionnaire de paquets du système si manquant. Initialise le dépôt (`git init`) si non versionné. Aucune modification de code ne doit être effectuée sans contrôle de version actif.
+2. **Strict Respect de l'Idempotence :**
+   - Ne jamais réinitialiser un dépôt Git déjà existant.
+   - Ne jamais écraser un fichier `CLAUDE.md`, `GEMINI.md` ou `PROJECT_CONTEXT.md` déjà présent ou personnalisé par l'utilisateur.
+   - Mettre à jour les compétences (`skills/`) sans détruire les éventuelles compétences tierces déjà installées.
+3. **Détection de l'environnement :** Détecte si le projet tourne sous Claude Code (`CLAUDE.md` / `.claude/`) ou Google Antigravity (`GEMINI.md` / `.gemini/`).
+4. **Installation des Directives & Compétences :**
    - Pour Claude Code : `templates/CLAUDE.md` à la racine + dossiers dans `.claude/skills/`.
    - Pour Google Antigravity : `templates/GEMINI.md` à la racine + dossiers dans `~/.gemini/config/skills/`.
-4. **Fiche Projet :** Si aucun fichier `PROJECT_CONTEXT.md` n'existe à la racine du projet utilisateur, installe le modèle depuis `templates/PROJECT_CONTEXT.md`.
-5. **Remplissage Guidé :** Pose les questions du `PROJECT_CONTEXT.md` une par une, remplis le fichier avec les réponses de l'utilisateur et demande validation.
-6. **Onboarding & Diagnostic :** Pose deux questions d'orientation sur le projet avant de lancer l'audit initial (`architecture-challenge`).
+5. **Fiche Projet & Diagnostic :** Si `PROJECT_CONTEXT.md` est neuf, guide l'utilisateur pour le renseigner, puis propose d'activer `architecture-challenge`.
 
 ---
 
@@ -63,7 +64,7 @@ Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scr
 
 ## 🛠️ Alternative : Installation manuelle par script
 
-Les scripts vérifient automatiquement la présence de Git, initialisent le projet (`git init`) si nécessaire et déploient les modèles (`CLAUDE.md`, `GEMINI.md`, `PROJECT_CONTEXT.md`) ainsi que les compétences :
+Les scripts sont **100% autonomes et strictement idempotents** : ils installent Git silencieusement si absent, rafraîchissent le `PATH` en mémoire, initialisent le projet sans réécraser l'existant, et mettent à jour les compétences :
 
 **Sous Windows (PowerShell) :**
 ```powershell
