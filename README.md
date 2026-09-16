@@ -2,6 +2,9 @@
 
 Un ensemble de compétences modulaires (**Skills**) et de standards d'ingénierie logicielle pour transformer votre agent IA en **CTO & Développeur Senior en binôme**.
 
+> **Principe Cardinal : Idempotence Universelle.**  
+> Tout le processus — de l'installation de Config-AI à la planification, aux scripts et au code produit par l'agent — est conçu pour être **strictement idempotent** : chaque opération peut être exécutée N fois d'affilée sans effet de bord destructif, sans duplication d'état et sans régression.
+
 ---
 
 ## ⚡ Installation Automatique en 1 Prompt (Autonome & Idempotent)
@@ -37,10 +40,11 @@ Exécute les actions suivantes pas à pas et de façon autonome :
 
 Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scrupuleusement le protocole suivant :
 1. **Autonomie & Sécurité Git préalable :** Vérifie la présence de Git. Installe-le de manière autonome via le gestionnaire de paquets du système si manquant. Initialise le dépôt (`git init`) si non versionné. Aucune modification de code ne doit être effectuée sans contrôle de version actif.
-2. **Strict Respect de l'Idempotence :**
+2. **Strict Respect de l'Idempotence Universelle :**
    - Ne jamais réinitialiser un dépôt Git déjà existant.
    - Ne jamais écraser un fichier `CLAUDE.md`, `GEMINI.md` ou `PROJECT_CONTEXT.md` déjà présent ou personnalisé par l'utilisateur.
    - Mettre à jour les compétences (`skills/`) sans détruire les éventuelles compétences tierces déjà installées.
+   - **Exigence sur le code produit :** Tout code, migration SQL (`IF NOT EXISTS`), script de seed, route d'API ou modification de fichier généré par l'agent doit être strictement idempotent.
 3. **Détection de l'environnement :** Détecte si le projet tourne sous Claude Code (`CLAUDE.md` / `.claude/`) ou Google Antigravity (`GEMINI.md` / `.gemini/`).
 4. **Installation des Directives & Compétences :**
    - Pour Claude Code : `templates/CLAUDE.md` à la racine + dossiers dans `.claude/skills/`.
@@ -53,12 +57,12 @@ Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scr
 
 | Compétence | Rôle & Objectif |
 | :--- | :--- |
-| **architecture-challenge** | Audite et challenge la viabilité des technologies envisagées par rapport aux contraintes réelles (mobile, offline, scalabilité) en mode *« Grill Me »*. |
+| **architecture-challenge** | Audite et challenge la viabilité, la résilience, la gestion de pannes et l'idempotence de la stack technique en mode *« Grill Me »*. |
 | **brainstorming** | Cadre le périmètre du MVP, élimine les fonctionnalités superflues et dessine les flux utilisateurs (Happy Path). |
-| **planification** | Découpe le projet en tâches atomiques (15-30 min) testables immédiatement sans aucun placeholder (`// TODO`). |
-| **verif-code** | Évalue le code produit sur un barème strict de 100 points (sécurité, robustesse, perfs mobiles, propreté). |
+| **planification** | Découpe le projet en tâches atomiques (15-30 min) testables immédiatement et **strictement ré-exécutables (idempotentes)** sans aucun placeholder (`// TODO`). |
+| **verif-code** | Évalue le code produit sur un barème strict de 100 points (sécurité, robustesse & **idempotence des opérations**, perfs mobiles, propreté). |
 | **ui-ux-pro-max** | Moteur de design UI/UX complet (palettes, styles modernes, micro-animations, typographies) pour des interfaces pros. |
-| **skill-finder** | Chasseur de compétences certifiées : explore explicitement les répertoires communautaires, audite la sécurité (antivirus IA) et installe à la demande. |
+| **skill-finder** | Chasseur de compétences certifiées : explore explicitement les répertoires communautaires, audite la sécurité (antivirus IA) et installe de manière **idempotente** à la demande. |
 
 ---
 

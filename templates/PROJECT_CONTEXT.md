@@ -7,13 +7,14 @@
 - **La fonctionnalité magique :** [Quelle est la valeur unique de l'app ?]
 
 ## 2. Décisions Techniques Validées
-- **Client Mobile :** [ex: React Native avec Expo / Flutter]
-- **Base de données & Auth :** [ex: Supabase / Firebase / Autre]
+- **Client Mobile / Web :** [ex: React Native avec Expo / Flutter / Next.js]
+- **Base de données & Auth :** [ex: Supabase / Firebase / PostgreSQL]
 - **Logique Métier & API :** [ex: Supabase Edge Functions / FastAPI / Node]
-- **Services Tiers :** [ex: Notifications Push, Stockage de fichiers, etc.]
+- **Services Tiers :** [ex: Notifications Push, Stockage de fichiers, Stripe, etc.]
 
 ## 3. Règles d'Ingénierie de l'Équipe
-- **Zéro placeholder :** Interdiction d'écrire des commentaires `// TODO` ou du code non implémenté.
+- **Zéro placeholder :** Interdiction formelle d'écrire des commentaires `// TODO` ou du code non implémenté.
+- **Idempotence Universelle :** Chaque script, migration, tâche ou endpoint d'API doit pouvoir être rejoué sans effet de bord destructif.
 - **Validation continue :** Une tâche = un test immédiat = un commit Git.
 - **Sécurité stricte :** Aucune clé privée côté client, politiques RLS hermétiques.
 

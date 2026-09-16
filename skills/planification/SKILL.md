@@ -1,6 +1,6 @@
 ---
 name: planification
-description: À utiliser lorsqu'un document de spécification ou un ensemble d'exigences est disponible, avant toute modification de code. Génère des plans d'implémentation granulaires, détaillés, sans placeholders et découpés en tâches autonomes testables.
+description: À utiliser lorsqu'un document de spécification ou un ensemble d'exigences est disponible, avant toute modification de code. Génère des plans d'implémentation granulaires, détaillés, sans placeholders et découpés en tâches autonomes testables et idempotentes.
 ---
 
 # Planification d'Implémentation
@@ -19,6 +19,7 @@ La compétence `planification` permet d'élaborer un plan d'action d'ingénierie
 2. **Découpage fin (Bite-sized Tasks)** : Chaque tâche doit être une unité minimale de travail (2 à 5 minutes par étape) se terminant par un livrable testable de manière autonome.
 3. **Approche TDD (Test-Driven Development)** : Les étapes doivent privilégier l'écriture du test échouant en premier, la vérification de l'échec, le code minimal pour réussir, la vérification du succès et le commit Git.
 4. **Zéro Placeholder (Règle Absolue)** : Interdiction stricte des placeholders ("TODO", "TBD", "implémenter plus tard", "gérer les erreurs appropriées", "ajouter des tests pour ce qui précède" sans le code).
+5. **Idempotence des Tâches & Commandes** : Chaque étape, script de migration ou modification de fichier doit être formulé pour être strictement ré-exécutable (idempotent) sans effet de bord destructif en cas d'interruption ou de retry.
 
 ---
 
@@ -47,7 +48,7 @@ Chaque plan d'implémentation généré doit respecter scrupuleusement le format
 ## Contraintes Globales
 
 - [Contrainte 1 copiée verbatim de la spec : versions minimales, règles de nommage, etc.]
-- [Contrainte 2]
+- [Contrainte 2 : Idempotence des opérations et des scripts]
 
 ---
 
@@ -106,6 +107,7 @@ Avant de présenter le plan à l'utilisateur, l'agent doit effectuer une auto-re
 1. **Couverture de la spécification** : Parcourir chaque exigence du document de design et vérifier qu'une tâche du plan la réalise.
 2. **Scan Anti-Placeholder** : S'assurer qu'aucun "TODO", "à venir" ou extrait de code incomplet ne subsiste.
 3. **Cohérence des signatures et types** : Vérifier que les noms de fonctions, paramètres et types réutilisés dans les tâches ultérieures correspondent exactement à ceux définis dans les tâches précédentes.
+4. **Vérification d'Idempotence** : S'assurer que les migrations SQL (ex: `IF NOT EXISTS`), les scripts d'initialisation et les étapes de configuration peuvent être rejoués N fois sans créer de doublons ou d'anomalies.
 
 Si des erreurs sont détectées, les corriger immédiatement dans le fichier de plan.
 

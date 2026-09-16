@@ -42,26 +42,30 @@ Avant d'exécuter une action (appel d'outil ou réponse à l'utilisateur), tu do
 6. **Zéro Placeholder (Non négociable) :**
    - Interdiction absolue d'écrire des raccourcis, des fonctions tronquées, des mocks factices ou des commentaires `// TODO`. Fournis systématiquement le code complet, prêt pour la production.
 
-7. **Validation Atomique & Découpage :**
+7. **Idempotence Universelle (Règle d'or) :**
+   - **Tout code, script, migration ou commande doit être strictement idempotent.**
+   - Tout script (PowerShell, Bash, SQL, seed de DB, migration), tout appel d'API, endpoint ou manipulation de fichier de configuration doit pouvoir être ré-exécuté N fois d'affilée sans provoquer d'erreur, sans doubler des enregistrements et sans corrompre l'état du projet.
+
+8. **Validation Atomique & Découpage :**
    - Découper le travail en tâches autonomes de 15 à 30 minutes.
    - Chaque tâche doit être validée et testable immédiatement avant d'engager la suivante.
    - Un commit Git clair et précis par tâche validée.
 
-8. **Persistance intelligente :**
+9. **Persistance intelligente :**
    - Sur une erreur transitoire, réessayer intelligemment.
    - Sur une erreur structurelle ou logique, changer immédiatement de stratégie ou d'arguments au lieu de répéter l'appel échoué.
 
-9. **Inhibition de la réponse hâtive :**
-   - Ne jamais agir précipitamment. Valider le raisonnement et le plan avant de modifier le premier fichier.
+10. **Inhibition de la réponse hâtive :**
+    - Ne jamais agir précipitamment. Valider le raisonnement et le plan avant de modifier le premier fichier.
 
 ---
 
 ## 📦 Compétences Dédiées (.gemini/config/skills/ ou Workspace)
 
 Invoque systématiquement la compétence appropriée selon la phase du travail :
-- **`architecture-challenge`** : Auditer, challenger la viabilité et les contraintes techniques en amont.
+- **`architecture-challenge`** : Auditer, challenger la viabilité, la résilience et les contraintes techniques en amont.
 - **`brainstorming`** : Explorer les idées, concevoir le parcours utilisateur et cadrer le périmètre du MVP.
-- **`planification`** : Établir la feuille de route technique étape par étape avant d'écrire du code.
-- **`verif-code`** : Auditer la sécurité, la performance et la propreté du code produit sur 100 points.
+- **`planification`** : Établir la feuille de route technique étape par étape avant d'écrire du code (avec tâches idempotentes).
+- **`verif-code`** : Auditer la sécurité, la performance, l'idempotence et la propreté du code produit sur 100 points.
 - **`ui-ux-pro-max`** : Concevoir des interfaces esthétiques, modernes et accessibles (palettes, composants, micro-animations).
-- **`skill-finder`** : Découvrir, auditer la sécurité et installer de nouvelles compétences communautaires.
+- **`skill-finder`** : Découvrir, auditer la sécurité et installer de nouvelles compétences communautaires de façon idempotente.

@@ -1,6 +1,6 @@
 ---
 name: skill-finder
-description: Recherche, audite la sécurité, adapte les chemins d'environnement (Claude Code vs Antigravity) et installe des compétences certifiées depuis les répertoires GitHub de référence (sickn33, rmyndharis, mattpocock).
+description: Recherche, audite la sécurité, adapte les chemins d'environnement (Claude Code vs Antigravity) et installe des compétences certifiées de façon idempotente depuis les répertoires GitHub de référence (sickn33, rmyndharis, mattpocock).
 ---
 
 # Compétence : Chasseur, Auditeur & Adaptateur de Skills (Skill-Finder)
@@ -46,17 +46,18 @@ Avant de proposer ou d'installer la compétence, analyse scrupuleusement le fich
 Avant d'écrire le fichier final sur le disque de l'utilisateur :
 1. **Détection de l'outil hôte :**
    - Si l'utilisateur tourne sous **Claude Code** :
-     * Remplacer tout chemin durci type $HOME\.gemini\config\skills\<nom>\... ou ~/.gemini/... par le chemin relatif du projet : .claude/skills/<nom>/....
+     * Remplacer tout chemin durci type `$HOME\.gemini\config\skills\<nom>\...` ou `~/.gemini/...` par le chemin relatif du projet : `.claude/skills/<nom>/...`.
    - Si l'utilisateur tourne sous **Google Antigravity** :
-     * Ajuster les chemins vers .gemini/config/skills/<nom>/... ou vers le workspace local.
+     * Ajuster les chemins vers `.gemini/config/skills/<nom>/...` ou vers le workspace local.
 2. **Priorité aux chemins relatifs :**
-   - Privilégier les chemins relatifs par rapport à la racine du projet (ex: python .claude/skills/mon-skill/scripts/search.py) pour que le dépôt reste 100% portable entre collaborateurs et machines différentes.
+   - Privilégier les chemins relatifs par rapport à la racine du projet (ex: `python .claude/skills/mon-skill/scripts/search.py`) pour que le dépôt reste 100% portable entre collaborateurs et machines différentes.
 3. **Normalisation de l'OS (Windows vs Unix) :**
-   - Adapter les séparateurs de dossiers (/ vs \\) et la syntaxe des variables d'environnement selon que l'utilisateur est sous Windows (PowerShell) ou sous macOS/Linux (Bash/Zsh).
+   - Adapter les séparateurs de dossiers (`/` vs `\`) et la syntaxe des variables d'environnement selon que l'utilisateur est sous Windows (PowerShell) ou sous macOS/Linux (Bash/Zsh).
 
 ## 5. Restitution & Accord de l'Utilisateur
 Présente un rapport clair à l'utilisateur avant toute installation :
-`	ext
+
+```text
 🔍 Compétence trouvée : [Nom de la compétence]
 📦 Dépôt source : [sickn33 / rmyndharis / mattpocock]
 🌐 Lien : [URL exacte du skill sur GitHub]
@@ -65,10 +66,11 @@ Présente un rapport clair à l'utilisateur avant toute installation :
 🎯 Ce qu'elle apporte : [Résumé clair en 2 phrases]
 
 Souhaitez-vous que je l'installe dans votre environnement ?
-`
+```
 
-## 6. Déploiement Sécurisé
+## 6. Déploiement Sécurisé & Strictement Idempotent
 Uniquement après l'accord explicite de l'utilisateur :
-- Si Claude Code : installe le contenu réécrit dans .claude/skills/<nom-du-skill>/SKILL.md (avec les scripts éventuels).
-- Si Google Antigravity : installe dans .gemini/config/skills/<nom-du-skill>/SKILL.md.
+- **Idempotence :** Vérifier si la compétence existe déjà. Si oui, mettre à jour les fichiers de manière non destructive. Ne jamais supprimer ni écraser les autres compétences du projet.
+- **Claude Code :** installe le contenu réécrit dans `.claude/skills/<nom-du-skill>/SKILL.md` (avec les scripts éventuels).
+- **Google Antigravity :** installe dans `.gemini/config/skills/<nom-du-skill>/SKILL.md` ou `.agents/skills/<nom-du-skill>/`.
 - Affiche la confirmation d'installation et propose un exemple de prompt pour utiliser immédiatement le nouveau skill adapté.

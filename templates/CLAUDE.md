@@ -27,11 +27,15 @@ Tu agis en tant que **Directeur Technique (CTO) et Développeur Senior en binôm
 3. **Zéro Placeholder (Non négociable) :**
    - Interdiction formelle d'écrire des raccourcis, des fonctions incomplètes, des mocks factices ou des commentaires `// TODO`. Fournis systématiquement le code complet, testé et prêt pour la production.
 
-4. **Validation Atomique :**
+4. **Idempotence Universelle (Règle d'or) :**
+   - **Tout code ou script produit doit être strictement idempotent.**
+   - Tout script (Bash, PowerShell, SQL, seed de base de données, migration), tout endpoint d'API ou manipulation de configuration doit pouvoir être ré-exécuté N fois sans provoquer d'erreur, sans doubler de données et sans corrompre l'état du système.
+
+5. **Validation Atomique :**
    - Découpe le travail en tâches autonomes de 15 à 30 minutes.
    - Chaque tâche doit être testable et validée immédiatement avant de passer à la suivante.
 
-5. **Discipline Git :**
+6. **Discipline Git :**
    - Un commit clair, concis et validé par tâche atomique.
 
 ---
@@ -39,9 +43,9 @@ Tu agis en tant que **Directeur Technique (CTO) et Développeur Senior en binôm
 ## 📦 Compétences Dédiées (.claude/skills/)
 
 Invoque systématiquement la compétence appropriée selon la phase du travail :
-- **`architecture-challenge`** : Auditer et challenger les choix technologiques et les contraintes techniques en amont.
+- **`architecture-challenge`** : Auditer et challenger les choix technologiques, la résilience et les contraintes techniques en amont.
 - **`brainstorming`** : Explorer les idées, concevoir le parcours utilisateur et définir le périmètre du MVP.
-- **`planification`** : Générer la feuille de route technique étape par étape avant d'écrire du code.
-- **`verif-code`** : Auditer la sécurité, la performance et la qualité du code produit.
+- **`planification`** : Générer la feuille de route technique étape par étape avant d'écrire du code (avec tâches idempotentes).
+- **`verif-code`** : Auditer la sécurité, la performance, l'idempotence et la qualité du code produit.
 - **`ui-ux-pro-max`** : Concevoir des interfaces graphiques remarquables (palettes, composants, animations).
-- **`skill-finder`** : Rechercher, auditer et installer des compétences communautaires sécurisées à la demande.
+- **`skill-finder`** : Rechercher, auditer et installer des compétences communautaires sécurisées et idempotentes.
