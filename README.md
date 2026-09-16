@@ -25,7 +25,7 @@ Exécute les actions suivantes pas à pas et de façon autonome :
 3. Récupération des ressources : Récupère les fichiers du dépôt ci-dessus.
 4. Déploiement Idempotent :
    - Si Claude Code : Installe templates/CLAUDE.md à la racine (uniquement s'il n'existe pas déjà) et déploie/mets à jour les dossiers de skills/ dans .claude/skills/.
-   - Si Google Antigravity : Installe templates/GEMINI.md à la racine (uniquement s'il n'existe pas déjà) et déploie/mets à jour les dossiers de skills/ dans .gemini/config/skills/.
+   - Si Google Antigravity : Installe templates/GEMINI.md à la racine (uniquement s'il n'existe pas déjà) et déploie/mets à jour les dossiers de skills/ dans le répertoire utilisateur global ~/.gemini/config/skills/ (sur Windows: %USERPROFILE%\.gemini\config\skills, Linux/Mac: ~/.gemini/config/skills). Ne jamais créer de dossier .gemini/ relatif à la racine du projet.
 5. Fiche Contexte : Si aucun fichier PROJECT_CONTEXT.md n'existe à la racine, copie templates/PROJECT_CONTEXT.md. S'il existe déjà, conserve-le intact.
 6. Remplissage guidé :
    - Uniquement si PROJECT_CONTEXT.md vient d'être créé ou est encore vide, pose-moi les questions du template une par une pour le compléter, puis valide avec moi.
@@ -45,10 +45,10 @@ Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scr
    - Ne jamais écraser un fichier `CLAUDE.md`, `GEMINI.md` ou `PROJECT_CONTEXT.md` déjà présent ou personnalisé par l'utilisateur.
    - Mettre à jour les compétences (`skills/`) sans détruire les éventuelles compétences tierces déjà installées.
    - **Exigence sur le code produit :** Tout code, migration SQL (`IF NOT EXISTS`), script de seed, route d'API ou modification de fichier généré par l'agent doit être strictement idempotent.
-3. **Détection de l'environnement :** Détecte si le projet tourne sous Claude Code (`CLAUDE.md` / `.claude/`) ou Google Antigravity (`GEMINI.md` / `.gemini/`).
+3. **Détection de l'environnement :** Détecte si le projet tourne sous Claude Code (`CLAUDE.md` / `.claude/`) ou Google Antigravity (`GEMINI.md` / `.gemini/` global ou `.agents/`).
 4. **Installation des Directives & Compétences :**
    - Pour Claude Code : `templates/CLAUDE.md` à la racine + dossiers dans `.claude/skills/`.
-   - Pour Google Antigravity : `templates/GEMINI.md` à la racine + dossiers dans `~/.gemini/config/skills/`.
+   - Pour Google Antigravity : `templates/GEMINI.md` à la racine + compétences déployées dans le répertoire utilisateur global `~/.gemini/config/skills/` (ou dans `.agents/skills/` à la racine du projet si restriction souhaitée au projet). Ne jamais créer de dossier `.gemini/` à la racine du projet.
 5. **Fiche Projet & Diagnostic :** Si `PROJECT_CONTEXT.md` est neuf, guide l'utilisateur pour le renseigner, puis propose d'activer `architecture-challenge`.
 
 ---
