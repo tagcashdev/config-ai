@@ -57,6 +57,7 @@ Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scr
 
 | Compétence | Rôle & Objectif |
 | :--- | :--- |
+| **init-projet** (`/init`, `/init-projet`) | Initialise et met à niveau de manière autonome et strictement **idempotente** n'importe quel projet avec le filet de sécurité Git, les standards d'ingénierie et la suite complète de compétences. |
 | **architecture-challenge** | Audite et challenge la viabilité, la résilience, la gestion de pannes et l'idempotence de la stack technique en mode *« Grill Me »*. |
 | **brainstorming** | Cadre le périmètre du MVP, élimine les fonctionnalités superflues et dessine les flux utilisateurs (Happy Path). |
 | **planification** | Découpe le projet en tâches atomiques (15-30 min) testables immédiatement et **strictement ré-exécutables (idempotentes)** sans aucun placeholder (`// TODO`). |
