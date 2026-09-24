@@ -49,3 +49,5 @@ Invoque systématiquement la compétence appropriée selon la phase du travail :
 - **`verif-code`** : Auditer la sécurité, la performance, l'idempotence et la qualité du code produit.
 - **`ui-ux-pro-max`** : Concevoir des interfaces graphiques remarquables (palettes, composants, animations).
 - **`skill-finder`** : Rechercher, auditer et installer des compétences communautaires sécurisées et idempotentes.
+- **`passation`** : Sauvegarder ou restaurer l'état exact du travail entre deux sessions pour repartir à zéro sans perte de contexte.
+- **`update-config`** : Synchroniser et mettre à jour les compétences depuis GitHub de façon strictement idempotente.

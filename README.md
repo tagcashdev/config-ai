@@ -64,13 +64,16 @@ Si un utilisateur te fournit ce dépôt pour configurer son projet, respecte scr
 | **verif-code** | Évalue le code produit sur un barème strict de 100 points (sécurité, robustesse & **idempotence des opérations**, perfs mobiles, propreté). |
 | **ui-ux-pro-max** | Moteur de design UI/UX complet (palettes, styles modernes, micro-animations, typographies) pour des interfaces pros. |
 | **skill-finder** | Chasseur de compétences certifiées : explore explicitement les répertoires communautaires, audite la sécurité (antivirus IA) et installe de manière **idempotente** à la demande. |
+| **passation** (`/passation`) | Sauvegarde l'état d'une session (objectifs, fichiers clés, tentatives ratées, prochaines étapes) dans `passation.md` et permet de reprendre à neuf sans perte de contexte. |
+| **update-config** (`/update-config`, `/update-skills`) | Synchronise et met à jour de façon strictement **idempotente** toutes les compétences depuis le dépôt GitHub officiel sans jamais altérer les compétences tierces ou les fichiers projet. |
 
 ---
 
-## 🛠️ Alternative : Installation manuelle par script
+## 🛠️ Alternative : Installation et Mise à Jour manuelles par script
 
 Les scripts sont **100% autonomes et strictement idempotents** : ils installent Git silencieusement si absent, rafraîchissent le `PATH` en mémoire, initialisent le projet sans réécraser l'existant, et mettent à jour les compétences :
 
+### Installation Initiale
 **Sous Windows (PowerShell) :**
 ```powershell
 .\scripts\install.ps1
@@ -80,3 +83,15 @@ Les scripts sont **100% autonomes et strictement idempotents** : ils installent 
 ```bash
 bash scripts/install.sh
 ```
+
+### Mise à Jour Rapide des Compétences
+**Sous Windows (PowerShell) :**
+```powershell
+.\scripts\update.ps1
+```
+
+**Sous Mac / Linux :**
+```bash
+bash scripts/update.sh
+```
+
